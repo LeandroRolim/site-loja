@@ -44,7 +44,9 @@
             </v-chip>
           </v-card-text>
           <v-card-actions>
-            <v-btn link text class="blue--text">Ver mais</v-btn>
+            <v-btn link text class="blue--text" :to="`/product/${product.id}`">
+              Ver mais
+            </v-btn>
           </v-card-actions>
         </v-card>
       </v-col>
@@ -54,20 +56,13 @@
 
 <script>
 export default {
-  data: () => ({
-    products: [],
-  }),
+  async asyncData({ $axios }) {
+    const products = (await $axios.$get('/api/products')).data
+    return { products }
+  },
   computed: {
     coupon() {
       return this.$store.state.coupon
-    },
-  },
-  created() {
-    this.loadProducts()
-  },
-  methods: {
-    async loadProducts() {
-      this.products = (await this.$axios.$get('/api/products')).data
     },
   },
 }
