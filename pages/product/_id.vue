@@ -1,6 +1,5 @@
 <template>
   <div>
-    {{ product }}
     <v-card elevation="2" class="pa-4">
       <v-img :src="product.photo" height="200px"></v-img>
       <v-card-title>
